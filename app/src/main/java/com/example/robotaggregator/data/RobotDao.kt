@@ -5,14 +5,14 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RobotDao {
-    @Query("SELECT * FROM robots ORDER BY createdAt DESC")
+    @Query("SELECT * FROM robots ORDER BY name ASC")
     fun getAllRobots(): Flow<List<Robot>>
     
-    @Query("SELECT * FROM robots WHERE isActive = 1 ORDER BY createdAt DESC")
+    @Query("SELECT * FROM robots WHERE isActive = 1 ORDER BY name ASC")
     fun getActiveRobots(): Flow<List<Robot>>
     
-    @Query("SELECT * FROM robots WHERE id = :id")
-    suspend fun getRobotById(id: Long): Robot?
+    @Query("SELECT * FROM robots WHERE id = :robotId")
+    suspend fun getRobotById(robotId: Long): Robot?
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRobot(robot: Robot): Long
@@ -23,9 +23,9 @@ interface RobotDao {
     @Delete
     suspend fun deleteRobot(robot: Robot)
     
-    @Query("DELETE FROM robots WHERE id = :id")
-    suspend fun deleteRobotById(id: Long)
+    @Query("UPDATE robots SET lastUsed = :timestamp WHERE id = :robotId")
+    suspend fun updateLastUsed(robotId: Long, timestamp: Long)
     
-    @Query("UPDATE robots SET isActive = :isActive WHERE id = :id")
-    suspend fun updateRobotStatus(id: Long, isActive: Boolean)
+    @Query("UPDATE robots SET isActive = :isActive WHERE id = :robotId")
+    suspend fun updateRobotStatus(robotId: Long, isActive: Boolean)
 }
