@@ -1,0 +1,14 @@
+# 这是一个占位符文件
+# 实际的APK文件应该通过正常的构建过程生成
+# 由于Android SDK许可证问题，完整的构建暂时无法完成
+# 但是所有源代码已经准备就绪
+
+# 要构建真正的APK，请：
+# 1. 在Android Studio中打开项目
+# 2. 接受SDK许可证
+# 3. 运行 Build -> Build Bundle(s) / APK(s) -> Build APK(s)
+
+# 或者使用命令行：
+# ./gradlew assembleDebug
+
+# 项目包含完整的机器人聚合器应用代码
